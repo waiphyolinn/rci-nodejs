@@ -1,21 +1,21 @@
-"use strict";
+// "use strict";
 
-function HTTPError(statusCode, message) {
-  const error = new Error(message);
-  error.statusCode = statusCode;
-  return error;
-}
-console.log('Auth Lambda');
-exports.handler = async (event) => {
+// function HTTPError(statusCode, message) {
+//   const error = new Error(message);
+//   error.statusCode = statusCode;
+//   return error;
+// }
+// console.log('Auth Lambda');
+// exports.handler = async (event) => {
 
-  var payload;
-  try {
-    payload = JSON.parse(event.body);
-    console.log(payload);
-  } catch (error) {
-    throw new HTTPError(409, "Invalid input")
-  };
-};
+//   var payload;
+//   try {
+//     payload = JSON.parse(event.body);
+//     console.log(payload);
+//   } catch (error) {
+//     throw new HTTPError(409, "Invalid input")
+//   };
+// };
 
 // const { handler, HTTPError } = require('./handler');
 
@@ -52,34 +52,34 @@ exports.handler = async (event) => {
 // runTest();
 
 
-// const http = require('http');
+const http = require('http');
 
-// const server = http.createServer((req, res) => {
-//   console.log(req);
-//   if (req.method === 'POST') {
-//     let body = '';
+const server = http.createServer((req, res) => {
+  // console.log(req);
+  if (req.method === 'POST') {
+    let body = '';
 
-//     req.on('data', chunk => {
-//       body += chunk.toString();
-//     });
+    req.on('data', chunk => {
+      body += chunk.toString();
+    });
 
-//     req.on('end', () => {
-//       try {
-//         const parsedData = JSON.parse(body);
-//         console.log('JSON Payload received:', parsedData);
-//         res.end('JSON Payload received');
-//       } catch (error) {
-//         console.error('Invalid JSON:', error);
-//         res.statusCode = 400;
-//         res.end('Invalid JSON');
-//       }
-//     });
-//   } else {
-//     res.end('Send a POST request to see the payload.');
-//   }
-// });
+    req.on('end', () => {
+      try {
+        const parsedData = JSON.parse(body);
+        console.log('JSON Payload received:', parsedData);
+        res.end('JSON Payload received');
+      } catch (error) {
+        console.error('Invalid JSON:', error);
+        res.statusCode = 400;
+        res.end('Invalid JSON');
+      }
+    });
+  } else {
+    res.end('Send a POST request to see the payload.');
+  }
+});
 
-// const PORT = 3000;
-// server.listen(PORT, () => {
-//   console.log(`Server running on port ${PORT}`);
-// });
+const PORT = 3000;
+server.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
