@@ -11,6 +11,7 @@ exports.handler = async (event) => {
   var payload;
   try {
     payload = JSON.parse(event.body);
+    console.log(payload);
   } catch (error) {
     throw new HTTPError(409, "Invalid input")
   };
